@@ -1,0 +1,7 @@
+name: Omneity
+main: Omneity
+version: 0.1-dev
+
+commands:
+  nullcommand:
+    description: Do nothing, ignore everything
