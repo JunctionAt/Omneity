@@ -13,7 +13,7 @@ def ircsay(plugin, event, args):
 
 	plugin.getServer().broadcastMessage(
 		chatcolor.GREEN + "IRC " +
-		chatcolor.WHITE + "<" + args[0] + "> " + ' '.join(args)
+		chatcolor.WHITE + "<" + user + "> " + ' '.join(args)
 		)
 
 @register_alias("test_permission")
