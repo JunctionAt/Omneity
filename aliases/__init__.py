@@ -36,7 +36,7 @@ class Abort(Exception):
 #	plugin.getServer().dispatchCommand(event.getPlayer(), "/what");
 #	event.getPlayer().sendMessage("Works")
 
-import modtools, help, debug, stupid
+import modtools, help, debug, stupid, tier2
 
 
 class AliasListener(BaseListener):
