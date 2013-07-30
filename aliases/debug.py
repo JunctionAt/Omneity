@@ -16,6 +16,12 @@ def ircsay(plugin, event, args):
 		chatcolor.WHITE + "<" + user + "> " + ' '.join(args)
 		)
 
+@register_alias("say")
+def say(plugin, event, args):
+	plugin.getServer().broadcastMessage(
+		"<" + event.getPlayer().getName() + "> " + ' '.join(args)
+		)
+
 @register_alias("test_permission")
 def test_permission(plugin, event, args):
 	player = event.getPlayer()
