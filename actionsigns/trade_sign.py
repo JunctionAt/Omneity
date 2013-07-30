@@ -43,7 +43,10 @@ class TeleportSign(SignBase):
 
 		give = ItemStack(sign_data['give_item'], sign_data.get('give_item_amount', 1), sign_data.get('give_item_data', 0))
 		if self.safe_give(player, give):
-			item.setAmount(item.getAmount() - sign_data.get('take_item_amount', 1))
+			if sign_data.get('take_item_amount', 1) == item.getAmount():
+				player.setItemInHand(None)
+			else:
+				item.setAmount(item.getAmount() - sign_data.get('take_item_amount', 1))
 			self.message(player, "Trade completed. Please have a nice day!")
 		else:
 			self.message(player, "Please clean up your inventory a bit, there is no space :(")
