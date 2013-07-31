@@ -83,3 +83,5 @@ class AliasListener(BaseListener):
 
 	def onEnable(self):
 		pass
+
+listener = AliasListener

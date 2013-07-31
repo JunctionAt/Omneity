@@ -1,22 +1,31 @@
-from org.bukkit.event.player import PlayerCommandPreprocessEvent
-from aliases import AliasListener
-from actionsigns import ActionSignListener
+from os import path
+from config import ConfigManager
 
 
 class Omneity(PythonPlugin):
 
-	def onEnable(self):
+	default_config = {
+			'modules': [
+				'aliases',
+				'actionsigns'
+			]
+		}
 
+	def onEnable(self):
 		# Config stuffs
 		self.getDataFolder().mkdirs()
+
+		self.config_manager = ConfigManager(path.join(self.getDataFolder().getAbsolutePath(), 'config.yml'), default=self.default_config)
+		self.config_manager.load_config()
 
 		# Register listeners
 		self.listeners = list()
 
-		self.listeners.append(AliasListener(self))
-		self.listeners.append(ActionSignListener(self))
+		for module_name in self.config_manager.config['modules']:
+			listener = __import__(module_name).listener(self)
 
-		for listener in self.listeners:
+			self.listeners.append(listener)
+
 			self.getServer().getPluginManager().registerEvents(listener, self);
 			listener.onEnable()
 
@@ -25,5 +34,7 @@ class Omneity(PythonPlugin):
 	def onDisable(self):
 		for listener in self.listeners:
 			listener.onDisable()
+
+		self.config_manager.save_config()
 
 		print "Omneity Disabled"

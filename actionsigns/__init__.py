@@ -3,6 +3,8 @@ from org.bukkit.event.player import PlayerInteractEvent
 from org.bukkit.block import Sign
 from org.bukkit.event.block import Action
 from baselistener import BaseListener
+from command import register_command
+from config import ConfigManager
 
 import yaml
 from os import path
@@ -27,34 +29,29 @@ import teleport_sign, trade_sign
 
 class ActionSignListener(BaseListener):
 
+	default_data = {
+			'signs': [
+				{
+					'coordinates': [0, 0, 0],
+					'type': 'teleport',
+					'destination': [0, 0, 0]
+				}
+			]
+		}
+
 	def __init__(self, plugin):
 		self.plugin = plugin
-		self.data_path = path.join(self.plugin.getDataFolder().getAbsolutePath(), 'signs.yml')
 
 		self.register_event(self.onPlayerInteract, PlayerInteractEvent)
 
-		if not path.exists(self.data_path):
-			with open(self.data_path, 'w+') as f:
-				f.write(yaml.dump(
-					{
-						'signs': [
-							{
-								'coordinates': [0, 0, 0],
-								'type': 'teleport',
-								'destination': [0, 0, 0]
-							}
-						]
-					}))
+		register_command(self.reload_command, 'reload-sign-config', permission="omneity.actionsigns.reload")
 
 	def onEnable(self):
-		with open(self.data_path, 'r') as f:
-			self.data = yaml.load(f)
-		self.data_modified = False
+		self.config_manager = ConfigManager(path.join(self.getDataFolder().getAbsolutePath(), 'signs.yml'), default=self.default_config)
+		self.config_manager.load_config()
 
 	def onDisable(self):
-		if self.data_modified:
-			with open(self.data_path, 'w+') as f:
-				f.write(yaml.dump(self.data))
+		self.config_manager.save_config()
 
 	def onPlayerInteract(self, event):
 
@@ -74,9 +71,8 @@ class ActionSignListener(BaseListener):
 			return
 
 		sign_coords = [block.getX(), block.getY(), block.getZ()]
-		print sign_coords
 
-		for sign_instance in self.data['signs']:
+		for sign_instance in self.config_manager.config['signs']:
 			if sign_instance['coordinates'] == sign_coords:
 				type_handler = sign_types[sign_instance['type']]
 
@@ -88,3 +84,9 @@ class ActionSignListener(BaseListener):
 					return #Something is fucked, should raise a exception
 
 		event.setCancelled(True)
+
+	def reload_command(self, sender, label, args):
+		self.config_manager.reload_config()
+		sender.sendMessage("Reloaded sign config")
+
+listener = ActionSignListener

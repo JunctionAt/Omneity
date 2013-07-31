@@ -11,14 +11,20 @@ commandmap = _commandmap_field.get(Bukkit.getPluginManager())
 
 class PythonCommand(Command):
 
-	def __init__(self, name, description, usage, aliases):
+	def __init__(self, func, name, description, usage, aliases, tab_complete):
 		super(Command, self).__init__(name, description, usage, aliases)
+		self.func = func
+		self.tab_complete = tab_complete
 	
 	def execute(self, sender, label, args):
-		print label
-		print args
+		self.func(sender, label, args)
+
+	def tabComplete(self, sender, alias, args):
+		if self.tab_complete:
+			self.tab_complete(sender, alias, args)
 
 
-def register_command(command_name, description="", usage="/<command>", aliases=[]):
-	command = PythonCommand(command_name, description, usage, aliases)
+def register_command(func, command_name, tab_complete=None, description="", usage="/<command>", permission=None, aliases=[]):
+	command = PythonCommand(func, command_name, description, usage, aliases, tab_complete)
+	command.setPermission(permission)
 	commandmap.register("/", command)

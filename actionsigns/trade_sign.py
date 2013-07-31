@@ -26,27 +26,36 @@ class TeleportSign(SignBase):
 		player = event.getPlayer()
 		inventory = player.getInventory()
 
+		take_item = sign_data["take_item"]
+		take_item_data = sign_data.get("take_item_data", 0)
+		take_item_amount = sign_data.get("take_item_amount", 1)
+		give_item = sign_data["give_item"]
+		give_item_data = sign_data.get("give_item_data", 0)
+		give_item_amount = sign_data.get("give_item_amount", 1)
+
+
 		if not item:
 			self.message(player, "Please hold the item you want to trade in your hand.")
 			return
 
 		# Check if the player holds the correct item
-		if item.getTypeId() != sign_data['take_item'] or item.getDurability() != sign_data.get('take_item_data', 0):
+		if item.getTypeId() != take_item or item.getDurability() != take_item_data:
 			self.message(player, "Please hold the item you want to trade in your hand.")
 			return
 
 		# Check that the player has the correct amount
-		if item.getAmount() < sign_data.get('take_item_amount', 1):
+		if item.getAmount() < take_item_amount:
 			self.message(player, "Make sure you have enough of the item you want to trade.")
 			return
 
 
-		give = ItemStack(sign_data['give_item'], sign_data.get('give_item_amount', 1), sign_data.get('give_item_data', 0))
-		if self.safe_give(player, give):
-			if sign_data.get('take_item_amount', 1) == item.getAmount():
+		if self.safe_give(player, ItemStack(give_item, give_item_amount, give_item_data)):
+
+			if take_item_amount == item.getAmount():
 				player.setItemInHand(None)
 			else:
-				item.setAmount(item.getAmount() - sign_data.get('take_item_amount', 1))
+				item.setAmount(item.getAmount() - take_item_amount)
+
 			self.message(player, "Trade completed. Please have a nice day!")
 		else:
 			self.message(player, "Please clean up your inventory a bit, there is no space :(")
