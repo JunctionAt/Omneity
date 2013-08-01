@@ -25,9 +25,9 @@ class Omneity(PythonPlugin):
 			listener = __import__(module_name).listener(self)
 
 			self.listeners.append(listener)
-
-			self.getServer().getPluginManager().registerEvents(listener, self);
 			listener.onEnable()
+			
+			self.getServer().getPluginManager().registerEvents(listener, self);
 
 		print "Omneity Enabled"
 

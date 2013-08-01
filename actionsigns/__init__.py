@@ -29,7 +29,7 @@ import teleport_sign, trade_sign
 
 class ActionSignListener(BaseListener):
 
-	default_data = {
+	default_config = {
 			'signs': [
 				{
 					'coordinates': [0, 0, 0],
@@ -42,19 +42,19 @@ class ActionSignListener(BaseListener):
 	def __init__(self, plugin):
 		self.plugin = plugin
 
+	def onEnable(self):
+		self.config_manager = ConfigManager(path.join(self.plugin.getDataFolder().getAbsolutePath(), 'signs.yml'), default=self.default_config)
+		self.config_manager.load_config()
+
 		self.register_event(self.onPlayerInteract, PlayerInteractEvent)
 
 		register_command(self.reload_command, 'reload-sign-config', permission="omneity.actionsigns.reload")
-
-	def onEnable(self):
-		self.config_manager = ConfigManager(path.join(self.getDataFolder().getAbsolutePath(), 'signs.yml'), default=self.default_config)
-		self.config_manager.load_config()
 
 	def onDisable(self):
 		self.config_manager.save_config()
 
 	def onPlayerInteract(self, event):
-
+		
 		block = event.getClickedBlock()
 
 		if block is None:

@@ -43,6 +43,8 @@ class AliasListener(BaseListener):
 
 	def __init__(self, plugin):
 		self.plugin = plugin
+
+	def onEnable(self):
 		self.register_event(self.onPlayerCommandPreprocess, PlayerCommandPreprocessEvent)
 		self.register_event(self.onServerCommand, ServerCommandEvent, priority="highest")
 
@@ -80,8 +82,5 @@ class AliasListener(BaseListener):
 			return
 
 		event.setCommand("nullcommand")
-
-	def onEnable(self):
-		pass
 
 listener = AliasListener
