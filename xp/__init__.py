@@ -1,5 +1,4 @@
 from org.bukkit.event.player import PlayerExpChangeEvent
-from org.bukkit import Location
 from baselistener import BaseListener
 from config import ConfigManager
 from os import path
@@ -18,7 +17,7 @@ class XpListener(BaseListener):
 		self.config_manager = ConfigManager(path.join(self.plugin.getDataFolder().getAbsolutePath(), 'xp.yml'), default=self.default_config)
 		self.config_manager.load_config()
 
-		self.register_event(self.onPlayerMoveEvent, PlayerExpChangeEvent)
+		self.register_event(self.onPlayerExpChangeEvent, PlayerExpChangeEvent)
 
 	def onDisable(self):
 		self.config_manager.save_config()
