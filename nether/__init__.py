@@ -26,7 +26,7 @@ class PortalCoordinates(Location):
 class NetherListener(BaseListener):
 
 	default_config = {
-
+			'create_opposite_portal': True
 		}
 
 	def __init__(self, plugin):
@@ -56,12 +56,21 @@ class NetherListener(BaseListener):
 		fr = event.getFrom()
 		to = event.getTo()
 
-		to_new = self.find_portal_data(fr)
-		to_new.setWorld(to.getWorld())
+		if self.config_manager.config['create_opposite_portal']:
+			to_new = self.find_portal_data(fr)
+			to_new.setWorld(to.getWorld())
 
-		event.setTo(to_new)
+			event.setTo(to_new)
 
-		event.setPortalTravelAgent(self.travelagent)
+			event.setPortalTravelAgent(self.travelagent)
+		else:
+			to.setX(fr.getX())
+			to.setY(fr.getY())
+			to.setZ(fr.getZ())
+
+			event.setTo(to)
+
+			event.setPortalTravelAgent(None)
 
 	def find_portal_data(self, location):
 		world = location.getWorld()
