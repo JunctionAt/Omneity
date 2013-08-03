@@ -27,7 +27,7 @@ class WarpListener(BaseListener):
 		self.config_manager = ConfigManager(path.join(self.plugin.getDataFolder().getAbsolutePath(), 'warps.yml'), default=self.default_config)
 		self.config_manager.load_config()
 
-		register_command(self.command_warp, 'warp', description="Warp to places", usage="/<command> <warp> | set <warp> | del <warp>", permission="omneity.warp")
+		register_command(self.command_warp, 'warp', description="Warp to places", usage="/<command> <warp> | set <warp> | del <warp> | list", permission="omneity.warp")
 
 	def onDisable(self):
 		self.config_manager.save_config()
@@ -65,6 +65,10 @@ class WarpListener(BaseListener):
 			self.config_manager.mark_dirty()
 
 			sender.sendMessage(chatcolor.GOLD + "Warp deleted.")
+			return
+
+		if args[0] == "list":
+			sender.sendMessage(chatcolor.GOLD + ', '.join(self.config_manager.config['warps'].keys()))
 			return
 
 		if len(args) != 1:
