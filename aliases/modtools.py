@@ -49,7 +49,7 @@ def lbrb(plugin, event, args):
 		event.getPlayer().sendMessage("Invalid usage, correct is: /lbrb <player>")
 		return
 
-	plugin.getServer().dispatchCommand(event.getPlayer(), "lb rollback player %s since 30 days" % args[0])
+	plugin.getServer().dispatchCommand(event.getPlayer(), "lb rollback player %s area 10000 since 30 days" % args[0])
 
 @register_alias("lbrb-r")
 def lbrb(plugin, event, args):
@@ -66,7 +66,7 @@ def lbrb(plugin, event, args):
 		return
 
 	plugin.getServer().dispatchCommand(event.getPlayer(), "ban %s %S" % (args[0], args[1]))
-	plugin.getServer().dispatchCommand(event.getPlayer(), "lb rollback player %s since 30 days" % args[0])
+	plugin.getServer().dispatchCommand(event.getPlayer(), "lb rollback player %s area 10000 since 30 days" % args[0])
 
 @register_alias("trace")
 def lbrb(plugin, event, args):
