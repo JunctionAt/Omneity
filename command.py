@@ -2,6 +2,7 @@ from org.bukkit.command import Command
 from org.bukkit import Bukkit
 from org.bukkit.plugin import SimplePluginManager
 from org.bukkit.command import Command
+from bukkit_helpers import chatcolor
 
 
 _commandmap_field = SimplePluginManager.getDeclaredField("commandMap")
@@ -17,11 +18,16 @@ class PythonCommand(Command):
 		self.tab_complete = tab_complete
 	
 	def execute(self, sender, label, args):
-		self.func(sender, label, args)
+		if not self.testPermission(sender):
+			return
+
+
+		if self.func(sender, label, args) is False:
+			sender.sendMessage(chatcolor.RED + "Usage: " + self.getUsage().replace("<command>", label))
 
 	def tabComplete(self, sender, alias, args):
 		if self.tab_complete:
-			self.tab_complete(sender, alias, args)
+			return self.tab_complete(sender, alias, args)
 
 
 def register_command(func, command_name, tab_complete=None, description="", usage="/<command>", permission=None, aliases=[]):

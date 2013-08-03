@@ -29,5 +29,5 @@ class ConfigManager(object):
 		self.save_config()
 		self.load_config()
 
-	def mark_config_dirty(self):
+	def mark_dirty(self):
 		self.data_modified = True
