@@ -1,4 +1,4 @@
 Omneity - A plugin for stuff
 ============================
 
-This plugin needs JunctinAt/Junction-Python-Loader plugin installed to work.
+This plugin needs https://github.com/hansihe/Python-Plugin-Loader plugin installed to work.
