@@ -51,10 +51,10 @@ class SpawnListener(BaseListener):
 		if not player.hasPlayedBefore():
 			player.teleport(self.getSpawnLocation())
 
-		first_join_message_info = self.config_manager.config['first-join-message']
-		if first_join_message_info['show']:
-			message = first_join_message_info['message'] % dict({'name': event.getPlayer().getName()}.items() + chatcolor.colors.items())
-			self.plugin.getServer().broadcastMessage(message)
+			first_join_message_info = self.config_manager.config['first-join-message']
+			if first_join_message_info['show']:
+				message = first_join_message_info['message'] % dict({'name': event.getPlayer().getName()}.items() + chatcolor.colors.items())
+				self.plugin.getServer().broadcastMessage(message)
 
 	def onPlayerPortalEvent(self, event):
 		if event.getFrom().getWorld().getEnvironment() == Environment.THE_END and not self.config_manager.config['allow-bed-spawn']:
