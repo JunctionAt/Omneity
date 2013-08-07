@@ -1,27 +1,38 @@
 from org.bukkit import ChatColor
 
-BOLD = unicode(ChatColor.BOLD)
-ITALIC = unicode(ChatColor.ITALIC)
-MAGIC = unicode(ChatColor.MAGIC)
-RESET = unicode(ChatColor.RESET)
-STRIKETHROUGH = unicode(ChatColor.STRIKETHROUGH)
-UNDERLINE = unicode(ChatColor.UNDERLINE)
+class ColorObj(dict):
 
-AQUA = unicode(ChatColor.AQUA)
-BLACK = unicode(ChatColor.BLACK)
-BLUE = unicode(ChatColor.BLUE)
-GOLD = unicode(ChatColor.GOLD)
-GRAY = unicode(ChatColor.GRAY)
-GREEN = unicode(ChatColor.GREEN)
-RED = unicode(ChatColor.RED)
-WHITE = unicode(ChatColor.WHITE)
-YELLOW = unicode(ChatColor.YELLOW)
+	def __setattr__(self, name, color):
+		self[name] = color
+		#super(dict, self).__setitem__(name, color)
 
-LIGHT_PURPLE = unicode(ChatColor.LIGHT_PURPLE)
+	def __getattr__(self, name):
+		return self[name]
 
-DARK_AQUA = unicode(ChatColor.DARK_AQUA)
-DARK_BLUE = unicode(ChatColor.DARK_BLUE)
-DARK_GRAY = unicode(ChatColor.DARK_GRAY)
-DARK_GREEN = unicode(ChatColor.DARK_GREEN)
-DARK_PURPLE = unicode(ChatColor.DARK_PURPLE)
-DARK_RED = unicode(ChatColor.DARK_RED)
+colors = ColorObj()
+
+colors.BOLD = BOLD = unicode(ChatColor.BOLD)
+colors.ITALIC = ITALIC = unicode(ChatColor.ITALIC)
+colors.MAGIC = MAGIC = unicode(ChatColor.MAGIC)
+colors.RESET = RESET = unicode(ChatColor.RESET)
+colors.STRIKETHROUGH = STRIKETHROUGH = unicode(ChatColor.STRIKETHROUGH)
+colors.UNDERLINE = UNDERLINE = unicode(ChatColor.UNDERLINE)
+
+colors.AQUA = AQUA = unicode(ChatColor.AQUA)
+colors.BLACK = BLACK = unicode(ChatColor.BLACK)
+colors.BLUE = BLUE = unicode(ChatColor.BLUE)
+colors.GOLD = GOLD = unicode(ChatColor.GOLD)
+colors.GRAY = GRAY = unicode(ChatColor.GRAY)
+colors.GREEN = GREEN = unicode(ChatColor.GREEN)
+colors.RED = RED = unicode(ChatColor.RED)
+colors.WHITE = WHITE = unicode(ChatColor.WHITE)
+colors.YELLOW = YELLOW = unicode(ChatColor.YELLOW)
+
+colors.LIGHT_PURPLE = LIGHT_PURPLE = unicode(ChatColor.LIGHT_PURPLE)
+
+colors.DARK_AQUA = DARK_AQUA = unicode(ChatColor.DARK_AQUA)
+colors.DARK_BLUE = DARK_BLUE = unicode(ChatColor.DARK_BLUE)
+colors.DARK_GRAY = DARK_GRAY = unicode(ChatColor.DARK_GRAY)
+colors.DARK_GREEN = DARK_GREEN = unicode(ChatColor.DARK_GREEN)
+colors.DARK_PURPLE = DARK_PURPLE = unicode(ChatColor.DARK_PURPLE)
+colors.DARK_RED = DARK_RED = unicode(ChatColor.DARK_RED)
