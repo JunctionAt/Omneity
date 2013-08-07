@@ -2,7 +2,7 @@ from bukkit_helpers import chatcolor
 from . import register_alias, Abort
 
 
-@register_alias(["o", "official"], permission='test')
+@register_alias(["o", "official"], permission='omneity.aliases.official')
 def broadcast(plugin, event, args):
 	plugin.getServer().broadcastMessage(
 		chatcolor.WHITE + "<" +
