@@ -13,7 +13,7 @@ class MessageListener(BaseListener):
 	def onEnable(self):
 		self.reply_states = dict()
 
-		register_command(self.messageCommand, 'message', aliases=['m', 'msg'], description="Send a message to a online player.", usage="/<command> <player> <message>")
+		register_command(self.messageCommand, 'message', aliases=['m', 'msg', 't', 'tell'], description="Send a message to a online player.", usage="/<command> <player> <message>")
 		register_command(self.replyCommand, 'reply', aliases=['r'], description="Reply to a message.", usage="/<command> <message>")
 
 	def onDisable(self):
