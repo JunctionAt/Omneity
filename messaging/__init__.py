@@ -22,7 +22,7 @@ class MessageListener(BaseListener):
 	def messageCommand(self, sender, alias, args):
 
 		if isinstance(sender, Player):
-			if len(args < 2):
+			if len(args) < 2:
 				return False
 
 			destination = self.getPlayerByShortName(args.pop(0))
@@ -39,7 +39,7 @@ class MessageListener(BaseListener):
 
 	def replyCommand(self, sender, alias, args):
 		if isinstance(sender, Player):
-			if len(args < 1):
+			if len(args) < 1:
 				return False
 
 			destinationName = self.reply_states.get(sender.getName(), None)
