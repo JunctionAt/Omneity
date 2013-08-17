@@ -66,10 +66,6 @@ class ActionSignListener(BaseListener):
 			return
 
 		sign = block_state
-
-		if not sign.getLine(0).lower().endswith("sign"):
-			return
-
 		sign_coords = [block.getX(), block.getY(), block.getZ()]
 
 		for sign_instance in self.config_manager.config['signs']:

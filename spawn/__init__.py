@@ -5,6 +5,8 @@ from org.bukkit.event.player import PlayerJoinEvent, PlayerPortalEvent, PlayerRe
 from org.bukkit import Location
 from bukkit_helpers import chatcolor
 from org.bukkit.World import Environment
+from command import register_command
+from org.bukkit.entity import Player
 
 
 class SpawnListener(BaseListener):
@@ -32,6 +34,8 @@ class SpawnListener(BaseListener):
 		self.register_event(self.onPlayerJoinEvent, PlayerJoinEvent)
 		self.register_event(self.onPlayerPortalEvent, PlayerPortalEvent)
 		self.register_event(self.onPlayerRespawnEvent, PlayerRespawnEvent)
+
+		register_command(self.spawnCommand, "spawn", permission="omneity.spawn.tp")
 
 	def onDisable(self):
 		self.config_manager.save_config()
@@ -63,6 +67,11 @@ class SpawnListener(BaseListener):
 	def onPlayerRespawnEvent(self, event):
 		if not event.isBedSpawn() or not self.config_manager.config['allow-bed-spawn']:
 			event.setRespawnLocation(self.getSpawnLocation())
+
+	def spawnCommand(self, sender, alias, args):
+		if isinstance(sender, Player):
+			sender.teleport(getSpawnLocation())
+			sender.sendMessage("Whoosh!")
 
 
 listener = SpawnListener
