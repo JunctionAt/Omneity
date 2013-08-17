@@ -75,7 +75,7 @@ class MessageListener(BaseListener):
 		found = None
 		delta = 9001
 		for player in players:
-			if ChatColor.stripColor(plauer.getName()).lower().startswith(lowername):
+			if ChatColor.stripColor(player.getName()).lower().startswith(lowername):
 				curdelta = len(player.getName()) - len(lowername)
 				if curdelta < delta:
 					found = player
