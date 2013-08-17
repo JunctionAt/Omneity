@@ -28,8 +28,10 @@ class MessageListener(BaseListener):
 			destination = self.getPlayerByShortName(args.pop(0))
 			if destination is None:
 				sender.sendMessage(chatcolor.RED + "Could not find that player.")
+				return
 
 			self.reply_states[sender.getName()] = destination.getName()
+			self.reply_states[destination.getName()] = sender.getName()
 
 			message = ' '.join(args)
 
@@ -45,9 +47,11 @@ class MessageListener(BaseListener):
 			destinationName = self.reply_states.get(sender.getName(), None)
 			if destinationName is None:
 				sender.sendMessage(chatcolor.RED + "There is nothing to reply to.")
+				return
 			destination = self.plugin.getServer().getPlayerExact(destinationName)
 			if destination is None:
 				sender.sendMessage(chatcolor.RED + "%s is no longer online." % destinationName)
+				return
 
 			message = ' '.join(args)
 
