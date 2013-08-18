@@ -70,7 +70,7 @@ class SpawnListener(BaseListener):
 
 	def spawnCommand(self, sender, alias, args):
 		if isinstance(sender, Player):
-			sender.teleport(getSpawnLocation())
+			sender.teleport(self.getSpawnLocation())
 			sender.sendMessage("Whoosh!")
 
 
