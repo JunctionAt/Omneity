@@ -17,7 +17,7 @@ class MessageListener(BaseListener):
 		register_command(self.replyCommand, 'reply', aliases=['r'], description="Reply to a message.", usage="/<command> <message>")
 
 	def onDisable(self):
-		self.config_manager.save_config()
+		pass
 
 	def messageCommand(self, sender, alias, args):
 
