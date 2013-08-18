@@ -79,7 +79,8 @@ class ActionSignListener(BaseListener):
 				else:
 					return #Something is fucked, should raise a exception
 
-		event.setCancelled(True)
+				event.setCancelled(True)
+				return
 
 	def reload_command(self, sender, label, args):
 		self.config_manager.reload_config()
