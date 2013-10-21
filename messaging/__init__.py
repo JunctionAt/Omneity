@@ -65,12 +65,12 @@ class MessageListener(BaseListener):
 		destination.sendMessage(self.formatMessage(source.getName(), "Me", message))
 
 	def formatMessage(self, source, destination, message):
-		return "[" + \
+		return chatcolor.GRAY + "[" + \
 			chatcolor.RED + source +\
-			chatcolor.WHITE + " -> " +\
+			chatcolor.GRAY + " -> " +\
 			chatcolor.GOLD + destination +\
-			chatcolor.WHITE + "] " +\
-			message
+			chatcolor.GRAY + "] " +\
+			chatcolor.WHITE + message
 
 	def getPlayerByShortName(self, name):
 		players = self.plugin.getServer().getOnlinePlayers()

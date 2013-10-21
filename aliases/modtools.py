@@ -10,6 +10,12 @@ def broadcast(plugin, event, args):
 		chatcolor.WHITE + "> " +
 		chatcolor.GREEN + ' '.join(args)
 		)
+@register_alias(["broadcast"], permission='omniety.aliases.broadcast')
+def server_broadcast(plugin, event, args):
+	plugin.getServer().broadcastMessage(
+		chatcolor.LIGHT_PURPLE + "[SERVER] " +
+		' '.join(args)
+		)
 
 @register_alias(["i", "item"])
 def give_item(plugin, event, args):
