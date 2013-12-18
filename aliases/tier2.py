@@ -10,10 +10,6 @@ def tpc(plugin, event, args):
 def tpc(plugin, event, args):
 	plugin.getServer().dispatchCommand(event.getPlayer(), "mode")
 
-@register_alias("modreq")
-def tpc(plugin, event, args):
-	plugin.getServer().dispatchCommand(event.getPlayer(), "req %s" % ' '.join(args))
-
 @register_alias("modlist")
 def tpc(plugin, event, args):
 	plugin.getServer().dispatchCommand(event.getPlayer(), "staff")
