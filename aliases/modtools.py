@@ -87,10 +87,10 @@ def lbrb(plugin, event, args):
 	if len(args) < 1:
 		event.getPlayer().sendMessage("Invalid usage, correct is: /trace-xray <player> [<days>]")
 		return
-	if len(args) == 1
+	if len(args) == 1:
 		plugin.getServer().dispatchCommand(event.getPlayer(), "lb lookup player %s sum blocks block 1 block 56 block 14 block 129" % args[0])
 		return
-	if len(args) == 2
+	if len(args) == 2:
 		plugin.getServer().dispatchCommand(event.getPlayer(), "lb lookup player %s sum blocks block 1 block 56 block 14 block 129 since %s days" % (args[0], args[1])
 		return
 
