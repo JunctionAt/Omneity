@@ -51,7 +51,13 @@ class GiveSign(SignBase):
             else:
                 inventory = player.getInventory()
                 for bad_item in given_items:
-                    inventory.removeItem(bad_item)
+                    not_removed = inventory.removeItem(bad_item)
+                    while not not_removed.isEmpty():
+                        amount = 0
+                        for entry in not_removed.entrySet():
+                            amount += entry.getValue().getAmount()
+                        bad_item.setAmount(bad_item.getAmount() - amount)
+                        not_removed = inventory.removeItem(bad_item)
                 player.updateInventory()
                 self.message(player, "Please clean up your inventory a bit, there is no space :(")
                 return
