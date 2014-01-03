@@ -36,12 +36,13 @@ class GiveSign(SignBase):
         given_items = []
 
         for item in sign_data["items"]:
+            print item
             give_item = item["give_item"]
             give_item_data = item.get("give_item_data", 0)
             give_item_amount = item.get("give_item_amount", 1)
             give_item_desc = item.get("give_item_desc", None)
 
-            itemstack = ItemStack(give_item, give_item_amount, give_item_desc)
+            itemstack = ItemStack(give_item, give_item_amount, give_item_data)
 
             if self.safe_give(player, itemstack):
                 given_items.append(itemstack)
