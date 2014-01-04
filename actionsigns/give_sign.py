@@ -36,7 +36,6 @@ class GiveSign(SignBase):
         given_items = []
 
         for item in sign_data["items"]:
-            print item
             give_item = item["give_item"]
             give_item_data = item.get("give_item_data", 0)
             give_item_amount = item.get("give_item_amount", 1)
