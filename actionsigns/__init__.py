@@ -25,7 +25,7 @@ def register_sign_type(sign_type):
 		sign_types[sign_type] = cls()
 	return wrap
 
-import teleport_sign, trade_sign
+import teleport_sign, trade_sign, give_sign
 
 class ActionSignListener(BaseListener):
 
