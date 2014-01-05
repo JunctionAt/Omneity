@@ -19,6 +19,10 @@ class TeleportSign(SignBase):
         if clear_inventory:
             inventory = player.getInventory()
             inventory.clear()
+            inventory.setBoots(None)
+            inventory.setChestplate(None)
+            inventory.setLeggings(None)
+            inventory.setHelmet(None)
         self.teleport_player(player, sign_data['destination'])
 
     def onRightClick(self, sign_data, plugin, event, sign):
