@@ -1,6 +1,7 @@
 from . import register_sign_type, SignBase
 from bukkit_helpers import chatcolor
 from org.bukkit.inventory import ItemStack
+from org.bukkit import Color
 
 
 @register_sign_type('give')
@@ -23,6 +24,9 @@ class GiveSign(SignBase):
         give_item_data: 0
         give_item_amount: 1
         give_item_desc: a sword
+      - give_item: 299
+        give_item_color: [255, 0, 0]
+        give_item_desc: red armor
       comment: You get a car!      [default: null]
     """
 
@@ -40,8 +44,17 @@ class GiveSign(SignBase):
             give_item_data = item.get("give_item_data", 0)
             give_item_amount = item.get("give_item_amount", 1)
             give_item_desc = item.get("give_item_desc", None)
+            give_item_color = item.get("give_item_color", None)
 
             itemstack = ItemStack(give_item, give_item_amount, give_item_data)
+
+            if give_item_color is not None:
+                red, green, blue = give_item_color
+                if give_item >= 298 and give_item <= 301:
+                    # Leather armor falls in this range
+                    larmor = LeatherArmorMeta(itemstack.getItemMeta())
+                    larmor.setColor(Color.fromRGB(red, green, blue))
+                    itemstack.setItemMeta(larmor)
 
             if self.safe_give(player, itemstack):
                 given_items.append(itemstack)
