@@ -12,6 +12,8 @@ class GiveSign(SignBase):
     description, and/or a single comment can be left to say to the player after
     all items have been delivered.
 
+    give_item_color currently only works for leather armor.
+
     Format:
 
     - coordinates: [x, y, z]
