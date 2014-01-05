@@ -7,7 +7,7 @@ class TeleportSign(SignBase):
     """
     Format:
 
-    - location: [x, y, z]
+    - coordinates: [x, y, z]
       type: teleport
       destination: [x, y, z]
       clear_inventory: true   [default: false]
