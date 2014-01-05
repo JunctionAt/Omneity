@@ -23,6 +23,7 @@ class TeleportSign(SignBase):
             inventory.setChestplate(None)
             inventory.setLeggings(None)
             inventory.setHelmet(None)
+            player.updateInventory()
         self.teleport_player(player, sign_data['destination'])
 
     def onRightClick(self, sign_data, plugin, event, sign):
