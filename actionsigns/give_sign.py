@@ -53,9 +53,16 @@ class GiveSign(SignBase):
 
             if give_item_color is not None:
                 red, green, blue = give_item_color
+                print "Got the following RGB triple: [%s, %s, %s]" % (red,
+                                                                      green,
+                                                                      blue)
                 if give_item >= 298 and give_item <= 301:
                     # Leather armor falls in this range
-                    larmor = LeatherArmorMeta(itemstack.getItemMeta())
+                    itemmeta = itemstack.getItemMeta()
+                    print "Item is type %s" % type(itemmeta)
+                    larmor = itemmeta
+                    print "Item has attribute 'setColor': %s" % hasAttr(larmor,
+                                                                        "setColor")
                     larmor.setColor(Color.fromRGB(red, green, blue))
                     itemstack.setItemMeta(larmor)
 
