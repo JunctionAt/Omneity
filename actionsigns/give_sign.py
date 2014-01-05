@@ -1,6 +1,7 @@
 from . import register_sign_type, SignBase
 from bukkit_helpers import chatcolor
 from org.bukkit.inventory import ItemStack
+from org.bukkit.inventory.meta import LeatherArmorMeta
 from org.bukkit import Color
 
 
