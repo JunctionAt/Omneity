@@ -2,21 +2,6 @@ from bukkit_helpers import chatcolor
 from . import register_alias, Abort
 
 
-@register_alias(["o", "official"], permission='omneity.aliases.official')
-def broadcast(plugin, event, args):
-	plugin.getServer().broadcastMessage(
-		chatcolor.WHITE + "<" +
-		chatcolor.RED + event.getPlayer().getName() +
-		chatcolor.WHITE + "> " +
-		chatcolor.GREEN + ' '.join(args)
-		)
-@register_alias(["broadcast"], permission='omniety.aliases.broadcast')
-def server_broadcast(plugin, event, args):
-	plugin.getServer().broadcastMessage(
-		chatcolor.LIGHT_PURPLE + "[SERVER] " +
-		' '.join(args)
-		)
-
 @register_alias(["i", "item"])
 def give_item(plugin, event, args):
 

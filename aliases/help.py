@@ -10,8 +10,8 @@ def bukkit_help(plugin, event, args):
 @register_alias("help")
 def help(plugin, event, args):
 	event.getPlayer().sendMessage(
-		chatcolor.GOLD + "Please see " + 
-		chatcolor.WHITE + "http://www.reddit.com/r/Junction/wiki/help" + 
+		chatcolor.GOLD + "Please see " +
+		chatcolor.WHITE + "https://junction.at/wiki/help" +
 		chatcolor.GOLD + " for the help page"
 		)
 
