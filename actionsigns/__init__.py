@@ -25,7 +25,7 @@ def register_sign_type(sign_type):
 		sign_types[sign_type] = cls()
 	return wrap
 
-import teleport_sign, trade_sign, give_sign
+import teleport_sign, trade_sign, give_sign, set_spawn_sign
 
 class ActionSignListener(BaseListener):
 
@@ -54,12 +54,12 @@ class ActionSignListener(BaseListener):
 		self.config_manager.save_config()
 
 	def onPlayerInteract(self, event):
-		
+
 		block = event.getClickedBlock()
 
 		if block is None:
 			return
-		
+
 		block_state = block.getState()
 
 		if not isinstance(block_state, Sign):
