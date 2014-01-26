@@ -5,6 +5,8 @@ from org.bukkit import Location
 @register_sign_type('set_spawn')
 class TeleportSign(SignBase):
     """
+    Note: Spawn module must be enabled with allow-bed-spawn set to true.
+
     Format:
 
     - coordinates: [x, y, z]
@@ -14,10 +16,8 @@ class TeleportSign(SignBase):
 
     def onLeftClick(self, sign_data, plugin, event, sign):
         player = event.getPlayer()
-        player.setSpawnLocation(Location(player.getWorld(),
-                                         sign_data['destination'][0],
-                                         sign_data['destination'][1],
-                                         sign_data['destination'][2]))
+        sp = sign_data['spawn_point']
+        player.setBedSpawnLocation(Location(player.getWorld(), sp[0], sp[1], sp[2]), True)
 
     def onRightClick(self, sign_data, plugin, event, sign):
         self.onLeftClick(sign_data, plugin, event, sign)
