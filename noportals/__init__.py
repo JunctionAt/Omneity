@@ -21,7 +21,7 @@ class PortalListener(BaseListener):
             for player in Bukkit.getServer().getOnlinePlayers():
                 if player.hasPermission("omneity.portal.light"):
                     distance = player.getLocation().distanceSquared(event.getBlocks()[0].getLocation())
-                    if 25 => distance => 5:
+                    if 5 <= distance <= 25:
                         event.setCancelled(True)
                         player.sendMessage("-")
                         player.sendMessage(chatcolor.YELLOW + "You, or someone quite near, tried to light a portal.")
